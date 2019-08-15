@@ -10,6 +10,7 @@ parameters:
     composer: ~
     composer_normalize: ~
     jsonlint: ~
+    eslint: ~
     phpcpd:
       directory: './src'
     phpcs:
@@ -32,3 +33,12 @@ parameters:
         - info
         - txt
         - md
+services:
+  task.eslint:
+    class: Stickee\GrumPHP\ESLint
+    arguments:
+      - '@config'
+      - '@process_builder'
+      - '@formatter.raw_process'
+    tags:
+      - {name: grumphp.task, config: eslint}
